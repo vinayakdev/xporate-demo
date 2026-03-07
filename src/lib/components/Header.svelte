@@ -40,6 +40,8 @@
 ╚══════════════════════════════════════════════════════════════════════╝
 -->
 <script lang="ts">
+	import { pwaState, triggerInstall } from '$lib/pwa.svelte';
+
 	let mobileOpen = $state(false);
 	let mobileSubs = $state<Record<string, boolean>>({});
 
@@ -384,6 +386,18 @@
 
 			<!-- Desktop CTAs -->
 			<div class="hidden shrink-0 items-center gap-2 xl:flex">
+				{#if pwaState.canInstall && !pwaState.isInstalled}
+					<button
+						onclick={triggerInstall}
+						class="flex items-center gap-1.5 rounded-md border border-white/20 px-3 py-2 text-sm font-medium text-slate-200 transition hover:border-orange-400 hover:text-orange-400"
+						title="Install Xporate App"
+					>
+						<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+						</svg>
+						Install App
+					</button>
+				{/if}
 				<a
 					href="/book/"
 					class="rounded-md bg-orange-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-600"
@@ -604,6 +618,17 @@
 
 				<!-- Mobile CTAs -->
 				<div class="flex flex-col gap-2 border-t border-white/10 pt-4 mt-4">
+					{#if pwaState.canInstall && !pwaState.isInstalled}
+						<button
+							onclick={triggerInstall}
+							class="flex items-center justify-center gap-2 rounded-md border border-white/20 px-4 py-3 text-sm font-medium text-slate-200 transition hover:border-orange-400 hover:text-orange-400"
+						>
+							<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+							</svg>
+							Install App
+						</button>
+					{/if}
 					<a
 						href="/book/"
 						class="block rounded-md bg-orange-500 px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-orange-600"
