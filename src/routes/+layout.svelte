@@ -4,59 +4,62 @@
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import PwaInstallPopup from '$lib/components/PwaInstallPopup.svelte';
-	import { pwaState } from '$lib/pwa.svelte';
+	import { pwaState, detectBrowser, isAlreadyInstalled, wasDismissed } from '$lib/pwa.svelte';
 
 	let { children } = $props();
 
 	onMount(() => {
-		// Already installed as standalone? Mark it and stop.
-		if (window.matchMedia('(display-mode: standalone)').matches) {
+		// Already installed — nothing to show
+		if (isAlreadyInstalled()) {
 			pwaState.isInstalled = true;
 			return;
 		}
+
+		// Already dismissed by user — don't annoy them again
+		if (wasDismissed()) return;
 
 		// Register service worker
 		if ('serviceWorker' in navigator) {
 			navigator.serviceWorker.register('/sw.js').catch(() => {});
 		}
 
-		function activatePrompt(e: any) {
-			pwaState.deferredPrompt = e;
-			pwaState.canInstall = true;
+		const browser = detectBrowser();
+		pwaState.browser = browser;
+
+		if (browser === 'chromium') {
+			// Chromium: wait for beforeinstallprompt (captured early in app.html)
+			function activatePrompt(e: any) {
+				pwaState.deferredPrompt = e;
+				pwaState.canInstall = true;
+				pwaState.showPopup = true;
+			}
+
+			const w = window as any;
+			if (w.__pwaPrompt) {
+				activatePrompt(w.__pwaPrompt);
+			} else {
+				const onReady = () => activatePrompt((window as any).__pwaPrompt);
+				window.addEventListener('pwa-prompt-ready', onReady);
+				window.addEventListener('appinstalled', onInstalled);
+				return () => {
+					window.removeEventListener('pwa-prompt-ready', onReady);
+					window.removeEventListener('appinstalled', onInstalled);
+				};
+			}
+
+			window.addEventListener('appinstalled', onInstalled);
+			return () => window.removeEventListener('appinstalled', onInstalled);
+		} else {
+			// Safari / Firefox: no beforeinstallprompt — show instructions popup
 			pwaState.showPopup = true;
 		}
 
-		// beforeinstallprompt may have already fired before onMount ran —
-		// the inline script in app.html captured it in window.__pwaPrompt
-		const w = window as any;
-		if (w.__pwaPrompt) {
-			activatePrompt(w.__pwaPrompt);
-		} else {
-			// Still waiting — listen for our custom event
-			const onReady = () => activatePrompt(w.__pwaPrompt);
-			window.addEventListener('pwa-prompt-ready', onReady);
-			// Cleanup handled below
-			const onInstalled = () => {
-				pwaState.isInstalled = true;
-				pwaState.canInstall = false;
-				pwaState.showPopup = false;
-				pwaState.deferredPrompt = null;
-			};
-			window.addEventListener('appinstalled', onInstalled);
-			return () => {
-				window.removeEventListener('pwa-prompt-ready', onReady);
-				window.removeEventListener('appinstalled', onInstalled);
-			};
-		}
-
-		const onInstalled = () => {
+		function onInstalled() {
 			pwaState.isInstalled = true;
 			pwaState.canInstall = false;
 			pwaState.showPopup = false;
 			pwaState.deferredPrompt = null;
-		};
-		window.addEventListener('appinstalled', onInstalled);
-		return () => window.removeEventListener('appinstalled', onInstalled);
+		}
 	});
 </script>
 
