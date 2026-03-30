@@ -42,11 +42,11 @@
 	];
 
 	const footerSolutions = [
-		{ label: 'Solutions Overview', href: '/solutions/' },
-		{ label: 'Start a Business (India)', href: '/solutions/start-a-business-india/' },
+		{ label: 'Solutions', href: '/solutions/' },
+		{ label: 'Start a Business', href: '/solutions/start-a-business-india/' },
 		{ label: 'Compliance & Governance', href: '/solutions/compliance-governance/' },
 		{ label: 'Legal Support', href: '/solutions/legal-support/' },
-		{ label: 'Expand to UAE', href: '/solutions/expand-to-uae/' },
+		{ label: 'Expand to Dubai', href: '/solutions/expand-to-uae/' },
 		{ label: 'Get Funding-Ready', href: '/solutions/get-funding-ready/' },
 		{ label: 'Scale Your Workspace', href: '/solutions/scale-your-workspace/' }
 	];

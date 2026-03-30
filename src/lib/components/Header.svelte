@@ -52,12 +52,12 @@
 	const navSolutionsColA = {
 		heading: 'Start / Stay Compliant / Expand',
 		items: [
-			{ label: 'Solutions Overview', href: '/solutions/' },
+			{ label: 'Solutions Hub', href: '/solutions/' },
 			{ label: 'Start a Business (India)', href: '/solutions/start-a-business-india/' },
 			{ label: 'Compliance & Governance', href: '/solutions/compliance-governance/' },
 			{ label: 'Legal Support', href: '/solutions/legal-support/' },
 			{ label: 'Expand to Dubai / UAE', href: '/solutions/expand-to-uae/' },
-			{ label: 'Get Funding-Ready (DPIIT)', href: '/solutions/get-funding-ready/' }
+			{ label: 'Get Funding-Ready', href: '/solutions/get-funding-ready/' }
 		]
 	};
 
