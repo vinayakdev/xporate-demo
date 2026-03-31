@@ -69,7 +69,7 @@
 		},
 		{
 			title: 'High-touch support',
-			desc: 'Structured tiers and clear ownership so you're not stuck in ticket loops.'
+			desc: "Structured tiers and clear ownership so you're not stuck in ticket loops."
 		},
 		{
 			title: 'Scale across India + UAE',

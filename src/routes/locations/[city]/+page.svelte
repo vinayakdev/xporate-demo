@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 
 	let openItem = $state<number | null>(null);
 
@@ -7,10 +7,10 @@
 		openItem = openItem === i ? null : i;
 	}
 
-	$: city = $page.params.city;
-	$: cityDisplay = city.charAt(0).toUpperCase() + city.slice(1);
+	const city = $derived(page.params.city);
+	const cityDisplay = $derived(city.charAt(0).toUpperCase() + city.slice(1));
 
-	const workspaceTypes = [
+	const workspaceTypes = $derived([
 		{ title: 'Virtual Office', href: `/virtual-office/${city}/` },
 		{ title: 'Coworking Space', href: `/coworking-space/${city}/` },
 		{ title: 'Managed Office', href: `/manage-office/${city}/` },
@@ -18,7 +18,7 @@
 		{ title: 'Meeting Rooms', href: `/meeting-rooms/${city}/` },
 		{ title: 'Day Pass', href: `/day-pass/${city}/` },
 		{ title: 'Event Spaces', href: `/event-spaces/${city}/` }
-	];
+	]);
 
 	const allHubs = [
 		{ label: 'Virtual Office India', href: '/virtual-office/' },
@@ -30,7 +30,7 @@
 		{ label: 'Event Spaces India', href: '/event-spaces/' }
 	];
 
-	const faqs = [
+	const faqs = $derived([
 		{
 			q: `Is this city page the same as "virtual office in ${cityDisplay}"?`,
 			a: 'No. This is a cross-category discovery page. For virtual office inventory, use the Virtual Office in {City} page.'
@@ -47,7 +47,7 @@
 			q: `What if a workspace type isn't available in ${cityDisplay}?`,
 			a: 'We hide that option and suggest nearby alternatives where possible.'
 		}
-	];
+	]);
 </script>
 
 <svelte:head>
