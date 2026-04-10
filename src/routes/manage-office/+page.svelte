@@ -85,7 +85,7 @@
 		},
 		{
 			title: 'Operate cleanly',
-			desc: 'Utilities, maintenance, housekeeping, and building coordination are managed—so founders don't become office managers.'
+			desc: "Utilities, maintenance, housekeeping, and building coordination are managed—so founders don't become office managers."
 		}
 	];
 
