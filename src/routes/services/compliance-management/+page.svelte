@@ -5,78 +5,224 @@
 		openItem = openItem === i ? null : i;
 	}
 
-	const tiers = [
+	const trustBullets = [
+		'₹15,000/month standard retainer (up to 50 invoices/month)',
+		'Cloud bookkeeping setup + monthly maintenance',
+		'GST filing + reconciliations + input credit hygiene',
+		'ROC/secretarial compliance (registers, minutes, annual filings)',
+		'A compliance calendar you can actually follow'
+	];
+
+	const whoFor = [
 		{
-			name: 'Standard (50 invoices/month)',
-			price: '₹15,000/month + GST',
-			bestFor: 'Growing entities managing standard GST, TDS, and ROC compliance.',
-			included: [
-				'Monthly bookkeeping and income tax prep',
-				'GST compliance filings and reconciliations',
-				'TDS workflows (quarterly/annual)',
-				'ROC/secretarial compliance and filing',
-				'Compliance calendar and due-date tracking'
+			title: 'Pvt Ltd companies and LLPs',
+			desc: 'Entities that need a consistent compliance engine (not ad-hoc filing).'
+		},
+		{
+			title: 'Founders who don\'t want compliance on WhatsApp threads',
+			desc: 'A structured monthly system with deadlines, requests, and outputs.'
+		},
+		{
+			title: 'Teams preparing for funding or due diligence',
+			desc: 'Clean books, reconciled GST, and governance hygiene that investors expect.'
+		},
+		{
+			title: 'Businesses with recurring invoices',
+			desc: 'If you invoice monthly/weekly and need bookkeeping + GST hygiene.'
+		}
+	];
+
+	const scopeCategories = [
+		{
+			title: '1) Bookkeeping (cloud tools)',
+			items: [
+				'Setup in cloud bookkeeping tool (Tally/Zoho Books or equivalent as applicable)',
+				'Monthly bookkeeping based on invoices/bills/bank statements',
+				'Chart of accounts alignment and cleanup guidance'
 			]
 		},
 		{
-			name: 'Growth (100+ invoices/month)',
-			price: '₹25,000/month + GST',
-			bestFor: 'High-transaction entities needing expanded compliance support.',
-			included: [
-				'Everything in Standard',
-				'Higher invoice volume cap (100+ per month)',
-				'Enhanced GST reconciliation support',
-				'Multi-state GST compliance (where applicable)',
-				'Dedicated compliance officer'
+			title: '2) GST compliance (monthly)',
+			items: [
+				'GSTR-1 and GSTR-3B preparation and filing support (as applicable)',
+				'Reconciliation guidance to reduce mismatches and credit loss',
+				'Input tax credit (ITC) hygiene checks (within scope)',
+				'Query/notice coordination within standard support (as applicable)'
 			]
 		},
 		{
-			name: 'Enterprise (Custom)',
-			price: 'Custom pricing',
-			bestFor: 'Large teams with multi-entity or complex tax structures.',
-			included: [
-				'Everything in Growth',
-				'Multi-entity coordination',
-				'Advanced tax planning support',
-				'Custom compliance workflows',
-				'Quarterly business reviews'
+			title: '3) TDS and income-tax workflows',
+			items: [
+				'TDS computation support and quarterly filing workflows (as applicable)',
+				'Advance tax / income-tax computation support (as applicable)',
+				'Guidance on challan payments (client pays; we compute and guide)'
 			]
+		},
+		{
+			title: '4) ROC / secretarial compliance (annual + periodic)',
+			items: [
+				'Statutory registers maintenance',
+				'Board meeting minutes and resolutions (template + drafting support)',
+				'Annual filings and secretarial calendar management (as applicable)',
+				'Director compliance reminders (DIN KYC, DSC renewals as applicable)'
+			]
+		},
+		{
+			title: '5) Compliance calendar + monthly reporting',
+			items: [
+				'Monthly compliance calendar with due dates',
+				'Monthly closure checklist and status update'
+			]
+		}
+	];
+
+	const notIncluded = [
+		'Statutory audit and CA certification fees (handled by your CA)',
+		'Litigation and court representation',
+		'High-volume bookkeeping beyond 50 invoices/month without an upgraded plan',
+		'Complex international taxation advisory or cross-border structuring',
+		'Internal payroll processing (if needed, can be scoped separately)'
+	];
+
+	const howItWorks = [
+		{
+			week: 'Week 1',
+			title: 'Data collection',
+			desc: 'You upload invoices, bills, bank statements, and any payroll/expense records.'
+		},
+		{
+			week: 'Week 2',
+			title: 'Bookkeeping + reconciliation',
+			desc: 'We post entries and reconcile accounts. You get clarifying questions early.'
+		},
+		{
+			week: 'Week 3',
+			title: 'Filing prep',
+			desc: 'GST returns and tax computations are prepared with an approval workflow.'
+		},
+		{
+			week: 'Week 4',
+			title: 'Filing + closure',
+			desc: 'Filings are submitted (within scope) and you receive a closure summary + next month checklist.'
+		}
+	];
+
+	const onboarding = [
+		{
+			step: '1',
+			title: 'Diagnostic call',
+			desc: 'We confirm entity type, GSTIN count, last filed period, and data sources.'
+		},
+		{
+			step: '2',
+			title: 'Access + tool setup',
+			desc: 'We set up bookkeeping tools and access workflows.'
+		},
+		{
+			step: '3',
+			title: 'Baseline status',
+			desc: 'We confirm pending returns, notices, and gaps.'
+		},
+		{
+			step: '4',
+			title: 'Calendar activation',
+			desc: 'We set your compliance calendar for GST, TDS, ROC, and tax tasks.'
+		}
+	];
+
+	const inputs = [
+		{
+			title: 'Bank statements',
+			desc: 'Monthly statements for all business accounts.'
+		},
+		{
+			title: 'Sales and purchase invoices',
+			desc: 'Invoices, bills, vendor agreements (as applicable).'
+		},
+		{
+			title: 'GST access and history',
+			desc: 'GST portal access (or coordination with your CA) + last filing status.'
+		},
+		{
+			title: 'Corporate documents',
+			desc: 'COI, PAN, TAN, GST certificates, and DSC details.'
+		},
+		{
+			title: 'Single point of contact',
+			desc: 'A designated person for approvals and clarifications.'
+		}
+	];
+
+	const problems = [
+		{
+			title: 'Missed deadlines',
+			desc: 'We run a calendar-based system so filings don\'t get forgotten.'
+		},
+		{
+			title: 'Messy books that block funding',
+			desc: 'We build predictable closure and reconciliations.'
+		},
+		{
+			title: 'Input tax credit leakage',
+			desc: 'We flag mismatch risks and improve ITC hygiene.'
+		},
+		{
+			title: 'Governance gaps',
+			desc: 'Registers, minutes, and compliance tasks are maintained consistently.'
+		}
+	];
+
+	const relatedServices = [
+		{
+			title: 'Company + GST Registration (One-Stop)',
+			desc: 'If you\'re new and need COI + GSTIN first.',
+			href: '/services/company-gst-registration/'
+		},
+		{
+			title: 'Legal Support (Contracts + Notices)',
+			desc: 'If you want contracts and legal hygiene aligned with your compliance.',
+			href: '/solutions/legal-support/'
+		},
+		{
+			title: 'Get Funding-Ready (DPIIT / Startup India)',
+			desc: 'If you\'re preparing for recognition and credibility.',
+			href: '/solutions/get-funding-ready/'
 		}
 	];
 
 	const faqs = [
 		{
-			q: 'What does "compliance management" actually mean?',
-			a: 'We handle monthly bookkeeping, GST filings/reconciliations, TDS workflows, and ROC/secretarial governance. We compute tax obligations; you remain responsible for payment.'
+			q: 'What does "up to 50 invoices/month" mean?',
+			a: 'It covers standard monthly bookkeeping volume for sales and purchases. If your volume is higher, we\'ll propose an upgraded plan.'
 		},
 		{
-			q: 'Are government fees and stamp duty included?',
-			a: 'No. Government fees and stamp duty are charged at actuals and billed separately.'
+			q: 'Do you file GST every month?',
+			a: 'Yes, we support monthly GST compliance workflows (as applicable). Filing frequency depends on your registration and obligations.'
 		},
 		{
-			q: 'Do you handle audits and litigation?',
-			a: 'No. Audit and litigation support requires separate scoping or external counsel. Our focus is preventive compliance and filing readiness.'
+			q: 'Do you handle ROC compliance too?',
+			a: 'Yes—annual and periodic ROC/secretarial tasks are included within defined scope.'
 		},
 		{
-			q: 'What if I exceed the invoice cap?',
-			a: 'We discuss overage pricing upfront. Alternatively, you can upgrade to a higher tier.'
+			q: 'Will you pay taxes on my behalf?',
+			a: 'No. We compute and guide; payments are made by the client via challans.'
 		},
 		{
-			q: 'Can I keep my CA and use your retainer for specific tasks?',
-			a: 'Yes. We can coordinate with your CA and handle only the pieces you want outsourced.'
+			q: 'Do you guarantee no notices from GST or ROC?',
+			a: 'No. Notices depend on authority checks and your transactions. We focus on clean records, timely filings, and documentation readiness.'
 		},
 		{
-			q: 'How do you handle multi-state GST?',
-			a: 'Standard tier covers single-state. Growth and Enterprise tiers support multi-state compliance coordination.'
+			q: 'Can you work alongside my CA?',
+			a: 'Yes. We can coordinate alongside your CA/CS, or run the monthly engine if you want a single operations owner.'
 		}
 	];
 </script>
 
 <svelte:head>
-	<title>Compliance Management (Retainer) | Xporate</title>
+	<title>Compliance Management Retainer: GST, ROC, TDS | Xporate</title>
 	<meta
 		name="description"
-		content="Outsourced compliance: bookkeeping, GST filings, TDS, ROC governance. From ₹15,000/month. Stay audit-ready and filing-proof."
+		content="₹15,000/month retainer (up to 50 invoices). Bookkeeping, GST filings, ROC compliance, TDS/IT workflows, and monthly compliance calendar. Book consult."
 	/>
 	<link rel="canonical" href="https://xporate.in/services/compliance-management/" />
 </svelte:head>
@@ -86,25 +232,20 @@
 	<div class="mx-auto max-w-5xl">
 		<div class="text-center">
 			<h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
-				Compliance Management (Retainer)
+				Compliance management retainer: stay active, filing-proof, and audit-ready
 			</h1>
 			<p class="mt-6 text-lg leading-relaxed text-slate-300">
-				An outsourced compliance department that keeps your entity active, filing-proof, and audit-ready.
-				Monthly bookkeeping, GST filings, TDS workflows, and ROC governance—all in one coordinated retainer.
+				An outsourced compliance department for Indian companies. We manage bookkeeping, GST, ROC/secretarial,
+				and tax workflows with a monthly operating system—so you don't miss filings, lose credits, or end up
+				in last-minute panic.
 			</p>
 			<p class="mt-3 text-sm font-medium text-orange-400">
-				Bookkeeping + GST + TDS + ROC (Monthly Retainer Model)
+				Bookkeeping • GST • ROC/Secretarial • TDS/IT workflows (monthly ops)
 			</p>
 
 			<!-- Trust bullets -->
 			<div class="mt-8 space-y-3">
-				{#each [
-					'One team for all compliance workflows (fewer handoffs)',
-					'Monthly filing and reconciliation coordination',
-					'Compliance calendar and deadline tracking',
-					'We compute tax; you authorize payments',
-					'Audit trail and documentation ready'
-				] as bullet (bullet)}
+				{#each trustBullets as bullet (bullet)}
 					<div class="flex items-start gap-3 rounded-lg bg-white/5 px-4 py-3 text-sm text-slate-300">
 						<span class="shrink-0 text-orange-400">✓</span>
 						<span>{bullet}</span>
@@ -116,8 +257,9 @@
 			<div class="mt-8 rounded-lg bg-slate-800 px-6 py-4 text-sm text-slate-300">
 				<p class="font-semibold text-slate-100">Important:</p>
 				<p class="mt-2">
-					We handle computation, filing support, and documentation. Tax payment responsibility remains
-					with you. Audit and litigation support require separate scoping.
+					We don't guarantee outcomes with authorities. Processing and notices depend on your filings, data
+					quality, and authority checks. We focus on clean records, timely submissions, and documentation
+					readiness.
 				</p>
 			</div>
 
@@ -153,137 +295,190 @@
 	</div>
 </section>
 
-<!-- PRICING TIERS -->
+<!-- PRICING -->
 <section class="bg-white px-4 py-16 sm:px-6 lg:px-8">
 	<div class="mx-auto max-w-5xl">
-		<h2 class="mb-4 text-center text-3xl font-bold text-slate-900">Pricing tiers</h2>
-		<p class="mb-10 text-center text-slate-600">
-			Choose based on transaction volume and complexity.
-		</p>
-
-		<div class="grid gap-6 md:grid-cols-3">
-			{#each tiers as tier}
-				<div class="rounded-2xl border border-slate-200 bg-white p-8">
-					<h3 class="text-xl font-bold text-slate-900">{tier.name}</h3>
-					<p class="mt-2 text-2xl font-bold text-orange-600">{tier.price}</p>
-					<p class="mt-4 text-sm text-slate-600">
-						<strong>Best for:</strong> {tier.bestFor}
-					</p>
-
-					<div class="mt-6">
-						<p class="font-semibold text-slate-900">Included:</p>
-						<ul class="mt-3 space-y-2">
-							{#each tier.included as item}
-								<li class="flex gap-2 text-sm text-slate-600">
-									<span class="shrink-0 text-orange-500">✓</span>
-									<span>{item}</span>
-								</li>
-							{/each}
-						</ul>
-					</div>
-				</div>
-			{/each}
+		<h2 class="mb-10 text-center text-3xl font-bold text-slate-900">Pricing (standard retainer)</h2>
+		<div class="grid gap-6 md:grid-cols-2">
+			<div class="rounded-2xl border border-slate-200 bg-slate-50 p-8">
+				<h3 class="text-xl font-bold text-slate-900">₹15,000/month</h3>
+				<p class="mt-1 text-sm font-medium text-orange-600">Up to 50 invoices/month</p>
+				<p class="mt-4 text-slate-600">
+					Includes a defined monthly scope. If your invoice volume is higher or your complexity requires
+					additional work, we'll quote transparently.
+				</p>
+			</div>
+			<div class="rounded-2xl border border-slate-200 bg-slate-50 p-8">
+				<h3 class="text-xl font-bold text-slate-900">Out-of-pocket expenses</h3>
+				<p class="mt-4 text-slate-600">
+					Government fees, challans, stamp duty, and third-party fees are charged at actuals.
+				</p>
+			</div>
 		</div>
-
 		<div class="mt-10 text-center">
 			<a
 				href="/book/"
 				class="rounded-md bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-600"
 			>
-				Book Consultation →
+				Book a Consult →
 			</a>
 		</div>
 	</div>
 </section>
 
-<!-- WHAT'S COVERED -->
+<!-- WHO THIS IS FOR -->
 <section class="bg-slate-50 px-4 py-16 sm:px-6 lg:px-8">
 	<div class="mx-auto max-w-5xl">
-		<h2 class="mb-10 text-center text-3xl font-bold text-slate-900">What's covered</h2>
+		<h2 class="mb-10 text-center text-3xl font-bold text-slate-900">Who this retainer is for</h2>
+		<div class="grid gap-6 sm:grid-cols-2">
+			{#each whoFor as item (item.title)}
+				<div class="rounded-2xl border border-slate-200 bg-white p-8">
+					<h3 class="font-bold text-slate-900">{item.title}</h3>
+					<p class="mt-3 text-sm text-slate-600">{item.desc}</p>
+				</div>
+			{/each}
+		</div>
+	</div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="bg-white px-4 py-16 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-5xl">
+		<h2 class="mb-10 text-center text-3xl font-bold text-slate-900">What's included (monthly scope)</h2>
 		<div class="space-y-8">
-			<div>
-				<h3 class="text-xl font-bold text-slate-900">Monthly bookkeeping</h3>
-				<ul class="mt-4 space-y-2">
-					{#each [
-						'Cloud-based bookkeeping setup (QuickBooks, Zoho, etc.)',
-						'Monthly transaction recording and bank reconciliation',
-						'Income statement and balance sheet maintenance',
-						'Monthly reporting and financial tracking'
-					] as item}
-						<li class="flex gap-3 text-slate-600">
-							<span class="shrink-0 text-orange-500">•</span>
-							<span>{item}</span>
-						</li>
-					{/each}
-				</ul>
-			</div>
-			<div>
-				<h3 class="text-xl font-bold text-slate-900">GST compliance</h3>
-				<ul class="mt-4 space-y-2">
-					{#each [
-						'Monthly GST input/output reconciliation',
-						'GST return filing (GSTR-1, GSTR-3B, etc.)',
-						'ITC tracking and reconciliation',
-						'GST audit trail maintenance'
-					] as item}
-						<li class="flex gap-3 text-slate-600">
-							<span class="shrink-0 text-orange-500">•</span>
-							<span>{item}</span>
-						</li>
-					{/each}
-				</ul>
-			</div>
-			<div>
-				<h3 class="text-xl font-bold text-slate-900">TDS & income tax workflows</h3>
-				<ul class="mt-4 space-y-2">
-					{#each [
-						'TDS computation and payment tracking (quarterly/annual)',
-						'Income tax quarterly/annual compliance prep',
-						'Deduction claim documentation',
-						'IT return filing support and guidance'
-					] as item}
-						<li class="flex gap-3 text-slate-600">
-							<span class="shrink-0 text-orange-500">•</span>
-							<span>{item}</span>
-						</li>
-					{/each}
-				</ul>
-			</div>
-			<div>
-				<h3 class="text-xl font-bold text-slate-900">ROC / secretarial compliance</h3>
-				<ul class="mt-4 space-y-2">
-					{#each [
-						'Annual forms filing (AOA, board resolutions, registers)',
-						'Board/shareholder meeting coordination and minutes',
-						'Compliance calendar and deadline tracking',
-						'Governance audit trail maintenance'
-					] as item}
-						<li class="flex gap-3 text-slate-600">
-							<span class="shrink-0 text-orange-500">•</span>
-							<span>{item}</span>
-						</li>
-					{/each}
-				</ul>
-			</div>
+			{#each scopeCategories as cat (cat.title)}
+				<div>
+					<h3 class="text-xl font-bold text-slate-900">{cat.title}</h3>
+					<ul class="mt-4 space-y-2">
+						{#each cat.items as item (item)}
+							<li class="flex gap-3 text-slate-600">
+								<span class="shrink-0 text-orange-500">•</span>
+								<span>{item}</span>
+							</li>
+						{/each}
+					</ul>
+				</div>
+			{/each}
 		</div>
 	</div>
 </section>
 
 <!-- WHAT'S NOT INCLUDED -->
+<section class="bg-slate-50 px-4 py-16 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-5xl">
+		<h2 class="mb-10 text-center text-3xl font-bold text-slate-900">
+			What's not included (unless separately scoped)
+		</h2>
+		<div class="rounded-2xl border border-slate-200 bg-white p-8">
+			<ul class="space-y-3">
+				{#each notIncluded as item (item)}
+					<li class="flex gap-3 text-slate-600">
+						<span class="shrink-0 text-slate-400">•</span>
+						<span>{item}</span>
+					</li>
+				{/each}
+			</ul>
+		</div>
+	</div>
+</section>
+
+<!-- HOW IT WORKS -->
 <section class="bg-white px-4 py-16 sm:px-6 lg:px-8">
 	<div class="mx-auto max-w-5xl">
-		<h2 class="mb-10 text-center text-3xl font-bold text-slate-900">What's not included</h2>
+		<h2 class="mb-4 text-center text-3xl font-bold text-slate-900">
+			How it works (monthly operating system)
+		</h2>
+		<p class="mb-10 text-center text-slate-600">
+			A predictable four-week cycle—not ad-hoc requests and last-minute panic.
+		</p>
+		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+			{#each howItWorks as phase, i (phase.week)}
+				<div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+					<div
+						class="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-orange-100 text-sm font-bold text-orange-600"
+					>
+						{i + 1}
+					</div>
+					<p class="text-xs font-semibold uppercase text-orange-600">{phase.week}</p>
+					<h3 class="mt-1 font-bold text-slate-900">{phase.title}</h3>
+					<p class="mt-3 text-sm text-slate-600">{phase.desc}</p>
+				</div>
+			{/each}
+		</div>
+	</div>
+</section>
+
+<!-- ONBOARDING -->
+<section class="bg-slate-50 px-4 py-16 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-5xl">
+		<h2 class="mb-4 text-center text-3xl font-bold text-slate-900">Onboarding (first 7 days)</h2>
+		<p class="mb-10 text-center text-slate-600">
+			We get you set up fast with a structured kickoff.
+		</p>
 		<div class="grid gap-6 sm:grid-cols-2">
-			{#each [
-				{ title: 'Government fees & stamp duty', desc: 'Charged at actuals and billed separately.' },
-				{ title: 'Tax payments', desc: 'You authorize and make payments. We compute and guide.' },
-				{ title: 'Audit & litigation', desc: 'Requires separate scoping or external counsel coordination.' },
-				{ title: 'Strategic tax planning', desc: 'Beyond standard filing compliance.' }
-			] as item}
-				<div class="rounded-2xl border border-slate-200 bg-slate-50 p-8">
+			{#each onboarding as step (step.step)}
+				<div class="flex gap-4 rounded-2xl border border-slate-200 bg-white p-6">
+					<div
+						class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-100 font-bold text-orange-600"
+					>
+						{step.step}
+					</div>
+					<div>
+						<h3 class="font-bold text-slate-900">{step.title}</h3>
+						<p class="mt-2 text-sm text-slate-600">{step.desc}</p>
+					</div>
+				</div>
+			{/each}
+		</div>
+	</div>
+</section>
+
+<!-- REQUIRED INPUTS -->
+<section class="bg-white px-4 py-16 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-5xl">
+		<h2 class="mb-10 text-center text-3xl font-bold text-slate-900">What we need from you (inputs)</h2>
+		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			{#each inputs as input (input.title)}
+				<div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+					<h3 class="font-bold text-slate-900">{input.title}</h3>
+					<p class="mt-3 text-sm text-slate-600">{input.desc}</p>
+				</div>
+			{/each}
+		</div>
+	</div>
+</section>
+
+<!-- COMMON PROBLEMS -->
+<section class="bg-slate-50 px-4 py-16 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-5xl">
+		<h2 class="mb-10 text-center text-3xl font-bold text-slate-900">
+			Common problems this retainer fixes
+		</h2>
+		<div class="grid gap-6 sm:grid-cols-2">
+			{#each problems as item (item.title)}
+				<div class="rounded-2xl border border-slate-200 bg-white p-8">
 					<h3 class="font-bold text-slate-900">{item.title}</h3>
 					<p class="mt-3 text-sm text-slate-600">{item.desc}</p>
 				</div>
+			{/each}
+		</div>
+	</div>
+</section>
+
+<!-- RELATED SERVICES -->
+<section class="bg-white px-4 py-16 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-5xl">
+		<h2 class="mb-10 text-center text-3xl font-bold text-slate-900">Related services</h2>
+		<div class="grid gap-6 md:grid-cols-3">
+			{#each relatedServices as svc (svc.href)}
+				<a
+					href={svc.href}
+					class="group rounded-2xl border border-slate-200 bg-slate-50 p-8 transition hover:border-orange-300 hover:bg-orange-50"
+				>
+					<h3 class="font-bold text-slate-900 group-hover:text-orange-700">{svc.title}</h3>
+					<p class="mt-3 text-sm text-slate-600">{svc.desc}</p>
+					<p class="mt-4 text-sm font-semibold text-orange-600">Learn more →</p>
+				</a>
 			{/each}
 		</div>
 	</div>
@@ -294,7 +489,7 @@
 	<div class="mx-auto max-w-3xl">
 		<h2 class="mb-10 text-center text-3xl font-bold text-slate-900">Frequently Asked Questions</h2>
 		<div class="space-y-3">
-			{#each faqs as faq, i}
+			{#each faqs as faq, i (faq.q)}
 				<div class="rounded-lg border border-slate-200 bg-white">
 					<button
 						onclick={() => toggleAccordion(i)}
@@ -328,10 +523,10 @@
 <!-- FINAL CTA -->
 <section class="bg-slate-900 px-4 py-20 text-white sm:px-6 lg:px-8">
 	<div class="mx-auto max-w-3xl text-center">
-		<h2 class="text-3xl font-bold">Stay audit-ready</h2>
+		<h2 class="text-3xl font-bold">Start your compliance retainer</h2>
 		<p class="mt-4 text-lg text-slate-300">
-			Tell us your entity type, transaction volume, and current compliance state. We'll recommend the right
-			tier and confirm fit.
+			Share your invoice volume, GSTIN count, and last filed month—we'll confirm fit and activate
+			the monthly calendar.
 		</p>
 		<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
 			<a
